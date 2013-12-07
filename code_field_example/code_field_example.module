@@ -1,0 +1,22 @@
+<?php
+/**
+ * @file
+ * Code Field Example module.
+ */
+
+/**
+ * Implements hook_code_field_info().
+ */
+function code_field_example_code_field_info() {
+  $fields['node']['article']['code_field_example_node_type_title'] = array(
+    'class' => 'CodeFieldExampleNodeTypeTitle',
+    'extra' => TRUE, // Provides extra field.
+    'views' => TRUE, // Provides views field.
+  );
+  $fields['user']['user']['code_field_example_user_hello'] = array(
+    'class' => 'CodeFieldExampleUserHello',
+    'extra' => TRUE, // Provides extra field.
+    'views' => TRUE, // Provides views field.
+  );
+  return $fields;
+}

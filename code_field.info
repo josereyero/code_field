@@ -1,0 +1,8 @@
+name = Code Field
+description = Create virtual fields through code. This is an API module.
+core = 7.x
+php = 5.3
+package = Fields
+files[] = includes/code_field_info.class.inc
+files[] = includes/code_field_base.class.inc
+files[] = views/handlers/field/code_field_views_handler_field_entity.inc
