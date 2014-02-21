@@ -1,0 +1,33 @@
+<?php
+/**
+ * @file
+ * D7Field Example module.
+ */
+
+/**
+ * Implements hook_d7_field_extra_fields().
+ */
+function d7field_example_d7_field_extra_fields() {
+  $fields['node']['article']['display']['d7field_example_node_type_title'] = array(
+    'class' => '\Drupal\d7field_example\D7FieldExampleNodeTypeTitle',
+  );
+  $fields['user']['user']['display']['d7field_example_user_hello'] = array(
+    'class' => '\Drupal\d7field_example\D7FieldExampleUserHello',
+  );
+  return $fields;
+}
+
+/**
+ * Implements hook_d7field_formatter_info().
+ */
+function d7field_example_d7_field_formatter_info() {
+  return array(
+    // Extend the core number formatter
+    'd7field_example_number' => array(
+      'label' => t('D7Field Example'),
+      // Field formatter to extend
+      'base formatter' => 'number_integer',
+      'class' => '\Drupal\d7field\FieldFormatter\FormatterExtender',
+    ),
+  );
+}

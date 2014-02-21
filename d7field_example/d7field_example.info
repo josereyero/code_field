@@ -1,6 +1,7 @@
-name = Code Field example
+name = D7 Field example
 description = Create virtual fields through code. This is an API module.
 core = 7.x
 php = 5.3
 package = Example modules
-files[] = code_field_example.inc
+dependencies[] = number
+files[] = d7field_example.inc

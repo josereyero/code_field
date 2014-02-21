@@ -1,0 +1,20 @@
+<?php
+/**
+ * @file
+ * D7Field module, installation script and schema hook.
+ */
+
+/**
+ * Implements hook_field_schema().
+ */
+function dxfield_field_schema($field) {
+  return ManagerBase::hook_field_schema($field);
+}
+
+/**
+ * Implements hook_install().
+ */
+function d7field_install() {
+  // Set module weight for it to run after most other modules.
+  db_query("UPDATE {system} SET weight = 1000 WHERE name = 'd7field' AND type = 'module'");
+}

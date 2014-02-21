@@ -1,0 +1,7 @@
+name = D7 Field
+description = Reimplement fields using OO code. This is an API module.
+core = 7.x
+php = 5.3
+package = D7
+dependencies[] = xautoload
+files[] = views/handlers/field/d7field_views_handler_field_entity.inc

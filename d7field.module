@@ -1,0 +1,240 @@
+<?php
+/**
+ * Drupal Module: D7Field
+ *
+ * By http://reyero.net
+ */
+
+use Drupal\d7field\ExtraField\ExtraFieldManager;
+use Drupal\d7field\FieldFormatter\FormatterManager;
+use Drupal\d7field\Field\FieldManager;
+use Drupal\d7field\FieldWidget\WidgetManager;
+
+/**
+ * Implements hook_element_info().
+ */
+function d7field_element_info() {
+  /**
+   * The 'd7field_extra_field' element must have one of these values:
+   * - '#instance', instance of a code field object
+   * - '#name' and '#definition', code field information.
+   */
+  $types['d7field_extra_field'] = array(
+    '#name' => NULL,
+    '#definition' => NULL,
+    '#entity' => NULL,
+    '#theme' => 'd7field_extra_field',
+    '#pre_render' => array('d7field_extra_field_pre_render'),
+  );
+  return $types;
+}
+
+/**
+ * Pre-render callback for code fields.
+ */
+function d7field_extra_field_pre_render($elements) {
+  if (isset($elements['#instance'])) {
+    return $elements['#instance']->pre_render($elements);
+  }
+  else {
+    $instance = ExtraFieldManager::getInstance($elements['#name'], $elements['#definition']);
+    $elements = $instance->build($elements);
+    return $instance->pre_render($elements);
+  }
+}
+
+/**
+ * Process callback for the element.
+ */
+
+
+/**
+ * Implements hook_field_extra_fields()
+ */
+function d7field_field_extra_fields() {
+  return ExtraFieldManager::getInfo();
+}
+
+/**
+ * Implements hook_field_info().
+ */
+function d7field_field_info() {
+  return FieldManager::getInfo();
+}
+
+/**
+ * Implements hook_field_info_alter()
+ */
+function d7field_field_info_alter(&$info) {
+  FieldManager::hook_field_info_alter($info);
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function d7field_field_formatter_info() {
+  return FormatterManager::getInfo();
+}
+
+/**
+ * Implements hook_field_formatter_info_alter().
+ */
+function d7field_field_formatter_info_alter(&$info) {
+  FormatterManager::hook_field_formatter_info_alter($info);
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function d7field_field_widget_info() {
+  return WidgetManager::getInfo();
+}
+
+/**
+ * Implements hook_field_widget_info_alter().
+ */
+function d7field_field_widget_info_alter(&$info) {
+  WidgetManager::hook_field_widget_info_alter($info);
+}
+
+/**
+ * Implements hook_entity_view().
+ */
+function d7field_entity_view($entity, $type, $view_mode, $langcode) {
+  ExtraFieldManager::hook_entity_view($entity, $type, $view_mode, $langcode);
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function d7field_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  return FormatterManager::hook_field_formatter_settings_form($field, $instance, $view_mode, $form, $form_state);
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function d7field_field_formatter_settings_summary($field, $instance, $view_mode) {
+  return FormatterManager::hook_field_formatter_settings_summary($field, $instance, $view_mode);
+}
+
+/**
+ * Implements hook_field_formatter_prepare_view().
+ */
+function d7field_field_formatter_prepare_view($entity_type, $entities, $field, $instances, $langcode, &$items, $displays) {
+  return FormatterManager::hook_field_formatter_prepare_view($entity_type, $entities, $field, $instances, $langcode, $items, $displays);
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function d7field_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  return FormatterManager::hook_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display);
+}
+
+/**
+ * Implements hook_field_settings_form().
+ */
+function d7field_field_settings_form($field, $instance, $has_data) {
+  return FieldManager::hook_field_settings_form($field, $instance, $has_data);
+}
+
+/**
+ * Implements hook_field_instance_settings_form()
+ */
+function d7field_field_instance_settings_form($field, $instance) {
+  return FieldManager::hook_field_settings_form($field, $instance, $has_data);
+}
+
+/**
+ * Implements hook_field_insert()
+ */
+function d7field_field_insert($entity_type, $entity, $field, $instance, $langcode, &$items) {
+  return FieldManager::hook_field_settings_form($field, $instance, $has_data);
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function d7field_field_is_empty($item, $field) {
+  return FieldManager::hook_field_is_empty($item, $field);
+}
+
+/**
+ * Implements hook_field_load();
+ */
+function d7field_field_load($entity_type, $entities, $field, $instances, $langcode, &$items, $age) {
+  return FieldManager::hook_field_load($entity_type, $entities, $field, $instances, $langcode, $items, $age);
+}
+
+/**
+ * Implements hook_field_prepare_translation()
+ */
+function d7field_field_prepare_translation($entity_type, $entity, $field, $instance, $langcode, &$items, $source_entity, $source_langcode) {
+  return FieldManager::hook_field_prepare_translation($entity_type, $entity, $field, $instance, $langcode, $items, $source_entity, $source_langcode);
+}
+
+/**
+ * Implements hook_field_prepare_view()
+ */
+function d7field_field_prepare_view($entity_type, $entities, $field, $instances, $langcode, &$items) {
+  return FieldManager::hook_field_prepare_view($entity_type, $entities, $field, $instances, $langcode, $items);
+}
+
+/**
+ * Implements hook_field_presave()
+ */
+function d7field_field_presave($entity_type, $entity, $field, $instance, $langcode, &$items) {
+  return FieldManager::hook_field_presave($entity_type, $entity, $field, $instance, $langcode, $items);
+}
+
+/**
+ * Implements hook_field_storage_update_field()
+ */
+function d7field_field_storage_update_field($field, $prior_field, $has_data) {
+  return FieldManager::hook_field_storage_update_field($field, $prior_field, $has_data);
+}
+
+/**
+ * Implements hook_field_update()
+ */
+function d7field_field_update($entity_type, $entity, $field, $instance, $langcode, &$items) {
+  return FieldManager::hook_field_update($entity_type, $entity, $field, $instance, $langcode, $items);
+}
+
+/**
+ * Implements hook_field_validate().
+ */
+function d7field_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
+  return FieldManager::hook_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, $errors);
+}
+
+/**
+ * Implements hook_theme().
+ */
+function d7field_theme() {
+  return array(
+    'd7field_extra_field' => array(
+      'render element' => 'element',
+    ),
+  );
+}
+
+/**
+ * Theme function.
+ */
+function theme_d7field_extra_field($variables) {
+  $element = $variables['element'];
+  return $element['#instance']->render($element);
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function d7field_views_api() {
+  $path = drupal_get_path('module', 'd7field');
+  return array(
+    'api' => '3.0',
+    'path' => $path . '/views',
+  );
+}
