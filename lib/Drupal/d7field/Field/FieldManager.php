@@ -1,6 +1,7 @@
 <?php
-
-
+/**
+ * Contains \Drupal\d7field\Field\FieldManager
+ */
 
 namespace Drupal\d7field\Field;
 

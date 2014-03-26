@@ -21,7 +21,9 @@ class WidgetManager extends ManagerBase {
    * Implements hook_field_widget_info_alter().
    */
   public static function hook_field_widget_info_alter(&$info) {
-    self::extendInfo(array_keys(self::getInfo()), $info);
+    if ($d7info = self::getInfo()) {
+      self::extendInfo(array_keys($d7info), $info);
+    }
   }
 
 }

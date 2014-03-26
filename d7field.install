@@ -4,11 +4,13 @@
  * D7Field module, installation script and schema hook.
  */
 
+use Drupal\d7field\Field\FieldManager;
+
 /**
  * Implements hook_field_schema().
  */
-function dxfield_field_schema($field) {
-  return ManagerBase::hook_field_schema($field);
+function d7field_field_schema($field) {
+  return FieldManager::hook_field_schema($field);
 }
 
 /**
