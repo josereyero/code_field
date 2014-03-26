@@ -27,8 +27,17 @@ class FormatterManager extends ManagerBase {
 
   /**
    * Get formatter object.
+   *
+   * @param array $definition
+   *   Formatter definition.
+   * @param array $instance
+   *   Field instance
+   *
+   * @return FieldFormatter
+   *   Formatter object.
    */
   public static function getFormatter($definition, $instance) {
+    // Cache keys for formatters are: definition type, field instance id
     $formatter = self::buildInstance('formatter', $definition['type'], $definition, array($definition['type'], $instance['id']));
     //$formatter->setInstance($instance);
     return $formatter;
@@ -102,15 +111,35 @@ class FormatterManager extends ManagerBase {
     }
   }
 
+  /**
+   *
+   * @param array $display
+   *   Display information
+   * @param array $instance
+   *   Field instance.
+   *
+   * @return FieldFormatter
+   *   Formatter object.
+   */
   protected static function getDisplayFormatter($display, $instance) {
     $definition = field_info_formatter_types($display['type']);
     $definition['settings'] = $display['settings'];
+    // Add type that will be needed later.
+    $definition['type'] = $display['type'];
     $formatter = static::getFormatter($definition, $instance);
     return $formatter;
   }
 
   /**
    * Get Formatter from field instance and view mode.
+   *
+   * @param array $instance
+   *   Field instance.
+   * @param string $view_mode
+   *   View mode name.
+   *
+   * @return FieldFormatter
+   *   Formatter object.
    */
   protected static function getInstanceFormatter($instance, $view_mode) {
     $display = static::getInstanceDisplay($instance, $view_mode);

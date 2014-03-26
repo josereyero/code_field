@@ -31,6 +31,14 @@ class FieldManager extends ManagerBase {
 
   /**
    * Get field instance object.
+   *
+   * @param array $field
+   *   Field definition.
+   * @param array $instance
+   *   Optional field instance.
+   *
+   * @return \Drupal\d7field\Field\Field
+   *   Field instance object.
    */
   static function getField($field, $instance = NULL) {
     $cache_keys = array($definition['field_name'], $instance ? $instance['id'] : 0);
