@@ -6,7 +6,7 @@
  * Based on extrafield_views_integration_handler_field_extrafield.inc
  */
 
-use \Drupal\d7field\Extrafield\ExtraFieldManager;
+use \Drupal\d7field\ExtraField\ExtraFieldManager;
 
 class d7field_views_handler_extra_field extends views_handler_field_entity {
 

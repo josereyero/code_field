@@ -4,4 +4,4 @@ core = 7.x
 php = 5.3
 package = D7
 dependencies[] = xautoload
-files[] = views/handlers/field/d7field_views_handler_field_entity.inc
+files[] = views/handlers/field/d7field_views_handler_extra_field.inc
