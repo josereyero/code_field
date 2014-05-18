@@ -153,7 +153,7 @@ class FieldManager extends ManagerBase {
   static function hook_field_update($entity_type, $entity, $field, $instance, $langcode, &$items) {
     $object = self::getField($field, $instance);
     if (method_exists($object, __FUNCTION__)) {
-      return $object->hook_field_update($entity_type, $entity, $field, $instance, $langcode, &$items);
+      return $object->hook_field_update($entity_type, $entity, $field, $instance, $langcode, $items);
     }
   }
 
